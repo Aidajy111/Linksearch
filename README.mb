@@ -8,7 +8,7 @@ Link Search - это небольшой веб-сервис, который пр
 
 ## Структура проекта
 
-`
+```
 cmd/server/main.go       — точка входа
 internal/handlers/       — HTTP-хендлеры
     mainHandler.go       — корневой эндпоинт
@@ -16,35 +16,35 @@ internal/handlers/       — HTTP-хендлеры
     report.go            — генерация PDF
 data/batches/            — хранилище наборов ссылок (.json)
 .gitignore               — исключение данных
-`
+```
 Все рабочие файлы (JSON наборов и временные PDF) скрыты из репозитория через .gitignore
 
 ## Запуск
-`go run cmd/server/main.go`
+```go run cmd/server/main.go```
 
 Сервис доступен по адресу:
-`http://localhost:8888`
+```http://localhost:8888```
 
 ## API
 #### POST /links
 Отправить список ссылок и получить статус доступности каждого URL.
-`
+```
 {
   "links": [
     "google.com",
     "yandex.ru",
   ]
 }
-`
+```
 Результаты сохраняются в `data/batches/link_{links_num}.json`
 
 #### GET /report
 Генерация PDF-отчёта по нескольким наборам ссылок.
-`
+```
 {
   "links_lists": [1, 2]
 }
-`
+```
 
 Сервер отправляет PDF-файл, содержащий:
  - номер набора id(links_num)
@@ -54,13 +54,13 @@ PDF файл формируется на лету, временно сохран
 
 ## Формат хранения данных
 Каждый набор ссылок сохраняется как отдельный JSON-файл:
-`
+```
 data/batches/link_1.json
 data/batches/link_2.json
-`
+```
 
 #### Пример файла:
-`
+```
 {
   "status": "done",
   "items": {
@@ -74,5 +74,5 @@ data/batches/link_2.json
   "created_at": "2025-01-30T12:00:00Z",
   "updated_at": "2025-01-30T12:00:02Z"
 }
-`
+```
 
