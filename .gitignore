@@ -1,0 +1,4 @@
+/data/batches/*
+!/data/batches/.gitkeep
+*.pdf
+.idea/
